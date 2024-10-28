@@ -10,14 +10,24 @@ const { ToDo } = require('../models/todo.model');
 
 router.get('/', (req, res) => {
   ToDo.find({})
-  .then((found) => {
-    console.log(found)
+    .then((found) => {
+      console.log(found)
       if (found) {
-          res.send(found);
+        res.send(found);
       }
       // console.log(err);
       res.send("Some error occured!")
-  }).catch(err => console.log("Error occured, " + err));
+    }).catch(err => console.log("Error occured, " + err));
+});
+
+router.post("/task", async (req, res) => {
+  const task = await ToDo.create({
+    title: req.body.title,
+    description: req.body.description,
+    is_done: req.body.is_done,
+  });
+
+  return res.status(200).json(user);
 });
 
 module.exports = router;
