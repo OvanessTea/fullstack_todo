@@ -1,13 +1,13 @@
-import Image from "next/image";
+import { ToDo } from "@/schemas/todo.schema";
 
 export default async function Home () {
-  const data: {apiResponse: string} = await fetch("http://localhost:9000/testAPI")
-    .then(res => res.text())
-    .then(res => { return { apiResponse: res } });
-
+  const data: ToDo[] = await fetch("http://localhost:9000/")
+    .then(async (res: Response) => { return await res.json() })
   return (
     <div>
-      <p className="App-intro">;{data.apiResponse}</p>
+      {data.map((elem: ToDo) => (
+        <p className="App-intro">{elem.title}</p>
+      ))}
     </div>
   );
 }
