@@ -27,7 +27,7 @@ router.post("/task", async (req, res) => {
     is_done: req.body.is_done,
   });
 
-  return res.status(200).json(user);
+  return res.status(200).json(task);
 });
 
 module.exports = router;
