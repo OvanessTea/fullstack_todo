@@ -30,4 +30,10 @@ router.post("/task", async (req, res) => {
   return res.status(200).json(task);
 });
 
+router.delete('/task/:id', async(req, res) => {
+  const item = await ToDo.deleteOne({ _id: req.params.id });
+
+  return res.status(200).json(item);
+})
+
 module.exports = router;
