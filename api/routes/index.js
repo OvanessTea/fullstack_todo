@@ -8,7 +8,7 @@ const { ToDo } = require('../models/todo.model');
 // });
 
 
-router.get('/', (req, res) => {
+router.get('/tasks', (req, res) => {
   ToDo.find({})
     .then((found) => {
       console.log(found)
@@ -20,7 +20,19 @@ router.get('/', (req, res) => {
     }).catch(err => console.log("Error occured, " + err));
 });
 
-router.post("/task", async (req, res) => {
+router.get('/tasks/:id', (req, res) => {
+  ToDo.findById(req.body.id)
+    .then((found) => {
+      console.log(found)
+      if (found) {
+        res.send(found);
+      }
+      // console.log(err);
+      res.send("Some error occured!")
+    }).catch(err => console.log("Error occured, " + err));
+});
+
+router.post("/tasks", async (req, res) => {
   const task = await ToDo.create({
     title: req.body.title,
     description: req.body.description,
@@ -30,7 +42,18 @@ router.post("/task", async (req, res) => {
   return res.status(200).json(task);
 });
 
-router.delete('/task/:id', async(req, res) => {
+router.put('/tasks/:id', async (req, res) => {
+  const task = await ToDo.put({
+    _id: req.body._id,
+    title: req.body.title,
+    description: req.body.description,
+    is_done: req.body.is_done,
+  });
+
+  return res.status(200).json(task);
+})
+
+router.delete('/tasks/:id', async (req, res) => {
   const item = await ToDo.deleteOne({ _id: req.params.id });
 
   return res.status(200).json(item);
