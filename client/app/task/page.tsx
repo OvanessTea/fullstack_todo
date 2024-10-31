@@ -9,19 +9,19 @@ import Task from '../components/Task';
 const Tasks = () => {
     const [tasks, setTasks] = useState<TaskModel[]>([]);
 
-    const { data, error, isLoading } = useSWR<any>(`@/api/tasks`, fetcher);
-
+    const { data, error, isLoading } = useSWR<any>(`${process.env.BASE_URL}/tasks`, fetcher);
+    console.log(data)
     useEffect(() => {
-        if(data && data.result.data) {
-            setTasks(data.result.data);
+        if(data && data.length) {
+            setTasks(data);
         }
     }, [data, isLoading])
 
     if (error) return <div>Failed to load</div>;
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div><span>Loading...</span></div>;
     if(!data) return null;
     let delete_Task: DeleteTaskModel = async(id: string) => {
-        const res = await fetch(`@/api/tasks/${id}`, {
+        const res = await fetch(`${process.env.BASE_URL}/tasks/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
