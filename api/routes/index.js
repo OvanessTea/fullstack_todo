@@ -21,6 +21,7 @@ router.get('/tasks', (req, res) => {
 });
 
 router.get('/tasks/:id', (req, res) => {
+  console.log(req.body)
   ToDo.findById(req.body.id)
     .then((found) => {
       console.log(found)
