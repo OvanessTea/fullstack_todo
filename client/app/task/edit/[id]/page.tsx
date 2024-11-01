@@ -31,8 +31,8 @@ const TaskEdit = ({ params }: { params: { id: string } }) => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    body: JSON.stringify(formData)
-                }
+                },
+                body: JSON.stringify(formData)
             })
             const content = await res.json();
             if (content.success > 0) {
