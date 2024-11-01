@@ -21,8 +21,7 @@ router.get('/tasks', (req, res) => {
 });
 
 router.get('/tasks/:id', (req, res) => {
-  console.log(req.body)
-  ToDo.findById(req.body.id)
+  ToDo.findById(req.params.id)
     .then((found) => {
       console.log(found)
       if (found) {
@@ -44,12 +43,11 @@ router.post("/tasks", async (req, res) => {
 });
 
 router.put('/tasks/:id', async (req, res) => {
-  const task = await ToDo.put({
-    _id: req.body._id,
+  const task = await ToDo.findOneAndUpdate({_id: req.params.id}, {
     title: req.body.title,
     description: req.body.description,
     is_done: req.body.is_done,
-  });
+  }, { new: true });
 
   return res.status(200).json(task);
 })
