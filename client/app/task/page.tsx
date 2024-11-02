@@ -12,15 +12,15 @@ const Tasks = () => {
     const { data, error, isLoading } = useSWR<any>(`${process.env.BASE_URL}/tasks`, fetcher);
     console.log(data)
     useEffect(() => {
-        if(data && data.length) {
+        if (data && data.length) {
             setTasks(data);
         }
     }, [data, isLoading])
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div><span>Loading...</span></div>;
-    if(!data) return null;
-    let delete_Task: DeleteTaskModel = async(id: string) => {
+    if (!data) return null;
+    let delete_Task: DeleteTaskModel = async (id: string) => {
         const res = await fetch(`${process.env.BASE_URL}/tasks/${id}`, {
             method: 'DELETE',
             headers: {
@@ -29,13 +29,14 @@ const Tasks = () => {
         });
         const content = await res.json();
         if (content.success > 0) {
-            setTasks(tasks?.filter((task: TaskModel ) => { return task._id !== id }));
+            setTasks(tasks?.filter((task: TaskModel) => { return task._id !== id }));
         }
     }
 
     return (
         <div className="w-full max-w-7xl m-auto">
-            <table className="w-full border-collapse border border-slate-400">
+            {/* <table className="w-full border-collapse border border-slate-400">
+                
                 <caption className="caption-top py-5 font-bold text-green-500 text-2xl">
                     List Tasks - Counter :
                     <span className="text-red-500 font-bold">{tasks?.length}</span>
@@ -58,7 +59,11 @@ const Tasks = () => {
                         }
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
+            {
+                tasks && tasks.map((item: TaskModel) => <Task key={item._id} item={item} deleteTask={delete_Task} />)
+            }
+            <Link href={`/task/create`} className="bg-green-500 p-2 inline-block text-white">Create</Link>
         </div>
     )
 }
