@@ -35,35 +35,12 @@ const Tasks = () => {
 
     return (
         <div className="w-full max-w-7xl m-auto">
-            {/* <table className="w-full border-collapse border border-slate-400">
-                
-                <caption className="caption-top py-5 font-bold text-green-500 text-2xl">
-                    List Tasks - Counter :
-                    <span className="text-red-500 font-bold">{tasks?.length}</span>
-                </caption>
-
-                <thead>
-                    <tr className='text-center'>
-                        <th className="border border-slate-300">Title</th>
-                        <th className="border border-slate-300">Description</th>
-                        <th className="border border-slate-300">Is Done?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colSpan={5}>
-                            <Link href={`/task/create`} className="bg-green-500 p-2 inline-block text-white">Create</Link>
-                        </td>
-                        {
-                            tasks && tasks.map((item: TaskModel)=> <Task key={item._id} item={item} deleteTask={delete_Task}/>)
-                        }
-                    </tr>
-                </tbody>
-            </table> */}
-            {
-                tasks && tasks.map((item: TaskModel) => <Task key={item._id} item={item} deleteTask={delete_Task} />)
-            }
-            <Link href={`/task/create`} className="bg-green-500 p-2 inline-block text-white">Create</Link>
+            <div className='flex gap-2 mb-3'>
+                {
+                    tasks && tasks.map((item: TaskModel) => <Task key={item._id} item={item} deleteTask={delete_Task} />)
+                }
+            </div>
+            <Link href={`/task/create`} className="rounded-lg bg-green-500 p-2 inline-block text-white">Create</Link>
         </div>
     )
 }
