@@ -9,7 +9,7 @@ interface IProp {
 
 const Task: React.FC<IProp> = (props: IProp) => {
   return (
-    <div className='border border-slate-500 rounded-lg w-60 p-2 relative'>
+    <div className='border border-slate-500 rounded-lg w-60 p-2 pb-12 relative'>
       <Link 
         href={`/task/edit/${props.item._id}`} 
         className='text-blue-300 cursor-pointer hover:text-blue-400'
@@ -18,7 +18,7 @@ const Task: React.FC<IProp> = (props: IProp) => {
       </Link>
       <hr className='my-2' />
       <p>{props.item.description}</p>
-      <div className='w-full fixed bottom-2'>
+      <div className='w-full absolute bottom-2'>
         <button 
           onClick={() => props.deleteTask(props.item._id!)} 
           className="bg-red-500 p-2 inline-block text-white text-sm"
