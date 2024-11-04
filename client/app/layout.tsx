@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google"
+import classNames from "classnames";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="w-full max-w-7xl mt-4 m-auto">
+    <html lang="en" className="h-full">
+      <body className={classNames(inter.className, 'flex justify-center item-center bg-slate-100 h-full')}>
+        <div className=" bg-slate-50 w-3/4 max-w-7xl m-auto h-4/5 rounded-lg shadow-2xl">
           {children}
         </div>
       </body>
