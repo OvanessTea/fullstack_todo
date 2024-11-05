@@ -1,6 +1,8 @@
 import React from 'react';
 import { DeleteTaskModel, TaskModel } from '../types';
 import Link from 'next/link';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
+import { faTrash, faGear } from "@fortawesome/free-solid-svg-icons";
 
 interface IProp {
   item: TaskModel;
@@ -10,27 +12,31 @@ interface IProp {
 const Task: React.FC<IProp> = (props: IProp) => {
   return (
     <div className='border border-slate-500 rounded-lg w-60 p-2 pb-12 relative'>
-      <Link 
-        href={`/task/edit/${props.item._id}`} 
-        className='text-blue-300 cursor-pointer hover:text-blue-400'
-      >
-        {props.item.title}
-      </Link>
-      <hr className='my-2' />
-      <p>{props.item.description}</p>
-      <div className='w-full absolute bottom-2'>
-        <button 
-          onClick={() => props.deleteTask(props.item._id!)} 
-          className="bg-red-500 p-2 inline-block text-white text-sm"
+      <div className='flex justify-between items-center'>
+        <Link
+          href={`/task/edit/${props.item._id}`}
+          className='text-blue-300 cursor-pointer hover:text-blue-400'
         >
-          Delete
-        </button>
-        <Link 
-          href={`/task/edit/${props.item._id}`} 
-          className='bg-yellow-500 p-2 inline-block ml-3 text-white text-sm'
-        >
-          Edit
+          {props.item.title}
         </Link>
+        <div className='flex gap-x-2'>
+          <Link
+            href={`/task/edit/${props.item._id}`}
+            className=''
+          >
+            <FontAwesomeIcon style={{ fontSize: "16px", color: "#000000", cursor: "pointer" }} icon={faGear}></FontAwesomeIcon>
+          </Link>
+          <button
+            onClick={() => props.deleteTask(props.item._id!)}
+            className=""
+          >
+            <FontAwesomeIcon style={{ fontSize: "16px", color: "#ff0000", cursor: "pointer" }} icon={faTrash}></FontAwesomeIcon>
+          </button>
+        </div>
+      </div>
+      <hr className='my-2' />
+      <p className='text-sm'>{props.item.description}</p>
+      <div className='w-full absolute bottom-2'>
       </div>
     </div>
   )

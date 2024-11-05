@@ -35,13 +35,12 @@ const Tasks = () => {
     }
     const date = new Date();
     const pathname = usePathname();
-    console.log(pathname)
     return (
         <div className="w-full max-w-7xl m-auto p-10">
             <div className="flex items-center gap-x-6 mb-4">
-                <div>
-                    <h1>Yours tasks</h1>
-                    <h2>
+                <div className='flex flex-col gap-y-1'>
+                    <h1 className='text-2xl font-bold'>Yours tasks</h1>
+                    <h2 className='text-sm'>
                         {date.toLocaleString('en-us', { weekday: 'long' })}, &nbsp;
                         {date.getDate()}&nbsp;
                         {date.toLocaleString('en-us', { month: 'long' })}
@@ -54,7 +53,7 @@ const Tasks = () => {
                 <button className={classNames(pathname === '/opened' ? 'text-blue-400' : 'text-gray-400', 'text-lg hover:text-blue-500 active:text-blue-800')}>Opened</button>
                 <button className={classNames(pathname === '/closed' ? 'text-blue-400' : 'text-gray-400', 'text-lg hover:text-blue-500 active:text-blue-800')}>Closed</button>
             </div>
-            <div className='flex gap-2 mb-3'>
+            <div className='flex flex-wrap gap-2 mb-3 overflow-y-auto'>
                 {
                     tasks && tasks.map((item: TaskModel) => <Task key={item._id} item={item} deleteTask={delete_Task} />)
                 }
