@@ -2,6 +2,9 @@
     width: calc(25% - 6px);
 }
 
+.complited {
+    text-decoration: line-through;
+}
 @media (max-width: 1920px) {
     .task_size {
         width: calc(33% - 6px);
