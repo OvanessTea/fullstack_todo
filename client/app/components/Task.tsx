@@ -3,6 +3,8 @@ import { DeleteTaskModel, TaskModel } from '../types';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
 import { faTrash, faGear } from "@fortawesome/free-solid-svg-icons";
+import classNames from 'classnames';
+import styles from './Task.module.scss';
 
 interface IProp {
   item: TaskModel;
@@ -11,7 +13,7 @@ interface IProp {
 
 const Task: React.FC<IProp> = (props: IProp) => {
   return (
-    <div className='border border-slate-500 rounded-lg w-60 p-2 pb-12 relative'>
+    <div className={classNames('border border-slate-500 rounded-lg   p-2 pb-12 relative', styles.task_size)}>
       <div className='flex justify-between items-center'>
         <Link
           href={`/task/edit/${props.item._id}`}

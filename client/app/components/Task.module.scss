@@ -1,0 +1,21 @@
+.task_size {
+    width: calc(25% - 6px);
+}
+
+@media (max-width: 1920px) {
+    .task_size {
+        width: calc(33% - 6px);
+    }
+}
+
+@media (max-width: 1500px) {
+    .task_size {
+        width: calc(50% - 6px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .task_size {
+        width: calc(100% - 6px);
+    }
+}
