@@ -18,7 +18,7 @@ const Tasks = () => {
         }
     }, [data, isLoading])
 
-    
+
     const [taskCounts, setTaskCounts] = useState<{ all: number, opened: number, closed: number }>({ all: 0, opened: 0, closed: 0 });
     useEffect(() => {
         if (data) {
@@ -35,19 +35,22 @@ const Tasks = () => {
         }
     }, [data]);
 
+    useEffect(() => {
+        if (data) {
+            let filteredTasks = [...data];
+            if (selectedTab === 'Closed') {
+                filteredTasks = data.filter((task: TaskModel) => task.is_done);
+            } else if (selectedTab === 'Opened') {
+                filteredTasks = data.filter((task: TaskModel) => !task.is_done);
+            }
+            setTasks(filteredTasks);
+        }
+    }, [data, selectedTab]);
+
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div><span>Loading...</span></div>;
     if (!data) return null;
 
-    useEffect(() => {
-        let filteredTasks = [...data];
-        if (selectedTab === 'Closed') {
-            filteredTasks = data.filter((task: TaskModel) => task.is_done);
-        } else if (selectedTab === 'Opened') {
-            filteredTasks = data.filter((task: TaskModel) => !task.is_done);
-        }
-        setTasks(filteredTasks);
-    }, [selectedTab]);
 
     const date = new Date();
     return (
@@ -67,7 +70,7 @@ const Tasks = () => {
                 <button
                     className={classNames(selectedTab === 'All' ? 'text-blue-400' : 'text-gray-400', 'text-lg hover:text-blue-500 active:text-blue-800 flex items-center gap-x-1')}
                     onClick={() => setSelectedTab('All')}>
-                    All 
+                    All
                     <span className='text-sm bg-blue-500 rounded-lg px-1 text-white min-w-[20px] text-center'>
                         {taskCounts.all}
                     </span>
@@ -75,7 +78,7 @@ const Tasks = () => {
                 <button
                     className={classNames(selectedTab === 'Opened' ? 'text-blue-400' : 'text-gray-400', 'text-lg hover:text-blue-500 active:text-blue-800 flex items-center gap-x-1')}
                     onClick={() => setSelectedTab('Opened')}>
-                    Opened 
+                    Opened
                     <span className='text-sm bg-blue-500 rounded-lg px-1 text-white min-w-[20px] text-center'>
                         {taskCounts.opened}
                     </span>
