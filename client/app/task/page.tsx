@@ -6,6 +6,8 @@ import { fetcher } from '../libs';
 import Link from 'next/link';
 import Task from '../components/Task';
 import classNames from 'classnames';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 const Tasks = ({ params }: { params: { id: string } }) => {
     const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -47,8 +49,8 @@ const Tasks = ({ params }: { params: { id: string } }) => {
         }
     }, [data, selectedTab]);
 
-    if (error) return <div>Failed to load</div>;
-    if (isLoading) return <div><span>Loading...</span></div>;
+    if (error) return <Error />;
+    if (isLoading) return <Loading />;
     if (!data) return null;
 
 

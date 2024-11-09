@@ -1,4 +1,6 @@
 'use client'
+import Loading from '@/app/components/Loading'
+import Error from '@/app/components/Error'
 import { fetcher } from '@/app/libs'
 import { DeleteTaskModel } from '@/app/types'
 import Link from 'next/link'
@@ -11,8 +13,8 @@ const Detail = () => {
     const { data: task, isLoading, error } = useSWR(`${process.env.BASE_URL}/tasks/${params.id}`, fetcher);
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();
-    if (error) return <div>Failed to load</div>;
-    if (isLoading) return <div><span>Loading...</span></div>;
+    if (error) return <Error />;
+    if (isLoading) return <Loading />;
     if (!task) return null;
     
     let delete_Task: DeleteTaskModel = async (id: string) => {

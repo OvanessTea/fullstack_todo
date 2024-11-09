@@ -1,4 +1,6 @@
 'use client'
+import Loading from '@/app/components/Loading';
+import Error from '@/app/components/Error';
 import { fetcher } from '@/app/libs';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation'
@@ -42,8 +44,8 @@ const TaskEdit = () => {
             }
         }
     };
-    if (error) return <div>Failed to load</div>;
-    if (isLoading) return <div><span>Loading...</span></div>;
+    if (error) return <Error />;
+    if (isLoading) return <Loading />;
     if (!task) return null;
 
     return (
