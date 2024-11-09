@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Task from '../components/Task';
 import classNames from 'classnames';
 
-const Tasks = () => {
+const Tasks = ({ params }: { params: { id: string } }) => {
     const [tasks, setTasks] = useState<TaskModel[]>([]);
     const { data, error, isLoading } = useSWR<any>(`${process.env.BASE_URL}/tasks`, fetcher);
     const [selectedTab, setSelectedTab] = useState<string>('All');

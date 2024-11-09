@@ -1,14 +1,13 @@
 'use client'
 import { fetcher } from '@/app/libs'
-import { DeleteTaskModel, TaskModel } from '@/app/types'
-import { faGear, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { DeleteTaskModel } from '@/app/types'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-const Detail = ({ params }: { params: { id: string } }) => {
+const Detail = () => {
+    const params = useParams();
     const { data: task, isLoading, error } = useSWR(`${process.env.BASE_URL}/tasks/${params.id}`, fetcher);
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();

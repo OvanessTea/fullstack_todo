@@ -1,12 +1,13 @@
 'use client'
 import { fetcher } from '@/app/libs';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
 
-const TaskEdit = ({ params }: { params: { id: string } }) => {
+const TaskEdit = () => {
     const router = useRouter();
+    const params = useParams();
     const { data: task, isLoading, error } = useSWR(`${process.env.BASE_URL}/tasks/${params.id}`, fetcher);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
